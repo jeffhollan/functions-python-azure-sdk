@@ -18,7 +18,9 @@ project.lock.json
 /App_Data
 /secrets
 /data
+__pycache__/
 .secrets
+.env
 appsettings.json
 local.settings.json
 

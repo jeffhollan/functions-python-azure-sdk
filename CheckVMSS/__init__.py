@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 
 import azure.functions as func
 from azure.mgmt.compute import ComputeManagementClient
@@ -19,8 +20,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     resourceGroup = req_body.get('resourceGroup')
     scaleSetName = req_body.get('scaleSetName')
 
-    instance_view = compute_client.virtual_machine_scale_sets.get_instance_view(resourceGroup, scaleSetName)
+    vmss_vms = compute_client.virtual_machine_scale_set_vms.list(resourceGroup, scaleSetName)
 
-    logging.info(instance_view)
+    vms = 0
+    for vm in iter(vmss_vms):
+        vms += 1
 
-    return func.HttpResponse(f"Hello!")
+    return func.HttpResponse(str(vms))
