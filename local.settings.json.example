@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "<Storage connection string>",
+    "CosmosDbConnectionString": "<CosmosDB connection string>",
+    "AZURE_CLIENT_ID": "<client ID>",
+    "AZURE_CLIENT_SECRET": "<client Secret>",
+    "AZURE_TENANT_ID": "<tenant Id>",
+    "AZURE_SUBSCRIPTION_ID": "<subscription Id>"
+  }
+}

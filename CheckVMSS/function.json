@@ -15,6 +15,15 @@
       "type": "http",
       "direction": "out",
       "name": "$return"
-    }
+    },
+    {
+      "name": "document",
+      "type": "cosmosDB",
+      "databaseName": "MyDatabase",
+      "collectionName": "MyCollection",
+      "createIfNotExists": true,
+      "connectionStringSetting": "CosmosDbConnectionString",     
+      "direction": "out"
+  }
   ]
 }

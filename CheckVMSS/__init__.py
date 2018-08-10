@@ -1,6 +1,7 @@
 import logging
 import os
 import json
+from datetime import datetime
 
 import azure.functions as func
 from azure.mgmt.compute import ComputeManagementClient
@@ -13,7 +14,8 @@ credentials = ServicePrincipalCredentials(
     )
 compute_client = ComputeManagementClient(credentials, os.environ['AZURE_SUBSCRIPTION_ID'])
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest,
+         document: func.Out[func.Document]) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     req_body = req.get_json()
@@ -26,4 +28,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     for vm in iter(vmss_vms):
         vms += 1
 
-    return func.HttpResponse(str(vms))
+    document.set(func.Document.from_dict({ 
+        'instances': vms,
+        'timestamp': datetime.utcnow().isoformat()
+        }))
+
+    return func.HttpResponse('There are currently ' + str(vms) + ' VM instances')
